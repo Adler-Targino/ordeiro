@@ -23,7 +23,14 @@ class DbManager {
         );`
       );
 
-      console.log('Banco de dados e tabela criados ou já existem');
+      // Cria a tabela timer se não existir
+      await this.db.execAsync(
+        `CREATE TABLE IF NOT EXISTS category (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,          
+          title TEXT, 
+          icon TEXT
+        );`
+      );
     } catch (error) {
       console.error('Erro ao criar banco ou tabela', error);
     }
