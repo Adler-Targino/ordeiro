@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import React, { useState, useEffect } from 'react'
 
 import HomeScreen from './screens/Home';
+import FormAddTimer from './screens/FormAddTimer'
 
 import DbManager from './data/database/dbmanager';
 
@@ -24,6 +25,7 @@ function App()
         <NavigationContainer>
             <Drawer.Navigator initialRouteName='HomeScreen'>
                 <Drawer.Screen name='HomeScreen' component={HomeScreen} />
+                <Drawer.Screen name='Adicionar um novo timer' component={FormAddTimer} />
             </Drawer.Navigator>
         </NavigationContainer>
     );
