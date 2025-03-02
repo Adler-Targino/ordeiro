@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     centerView: { 
-        backgroundColor: "#F1F1F1", 
+        backgroundColor: "#af82fb", 
         alignItems: "center", 
         justifyContent: "center" 
     },
@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 16,
         overflow: "hidden",
-        borderColor: "#7f33ff",
-        color: "#060606",
+        borderColor: "#f9a86c",
+        color: "#FFF",
         marginBottom: 15
     },
     dropdownButtonStyle: {
-        borderColor: "#7f33ff",
+        borderColor: "#f9a86c",
         borderWidth: 2,
         borderRadius: 10,
         flexDirection: 'row',
@@ -30,11 +30,12 @@ export const styles = StyleSheet.create({
     },
     dropdownButtonTxtStyle: {
         flex: 1,
+        color: '#FFF',
         fontSize: 16,
     },
     dropdownButtonArrowStyle: {
         fontSize: 22,
-        color: '#7f33ff',
+        color: '#FFF',
     },
     dropdownButtonIconStyle: {
         fontSize: 28,
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
     },
     saveButton: {
         marginTop: 15,
-        backgroundColor: "#a170f4", // Verde estilo sucesso
+        backgroundColor: "#f9a86c", // Verde estilo sucesso
         paddingVertical: 10,
         paddingHorizontal: 30,
         borderRadius: 8,

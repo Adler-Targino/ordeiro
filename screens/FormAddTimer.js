@@ -58,6 +58,7 @@ function FormAddTimer({ navigation }) {
                     style={styles.textInput}
                     onChangeText={onChangeText}
                     placeholder="Título"
+                    placeholderTextColor='#FFF'
                     value={text}
                 />
                 {/* Categoria */}
