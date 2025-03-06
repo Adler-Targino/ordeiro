@@ -17,22 +17,27 @@ class DbManager {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           date TEXT, 
           title TEXT, 
-          category INTEGER, 
+          category TEXT, 
           timePast INTEGER, 
           timeGoal INTEGER
         );`
       );
-
-      // Cria a tabela timer se não existir
-      await this.db.execAsync(
-        `CREATE TABLE IF NOT EXISTS category (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,          
-          title TEXT, 
-          icon TEXT
-        );`
-      );
     } catch (error) {
       console.error('Erro ao criar banco ou tabela', error);
+    }
+  }
+
+  async addTimer(date, title, category, timeGoal) {
+    try {
+
+      const result = await this.db.runAsync(
+        `INSERT INTO timer (date, title, category, timeGoal) 
+        VALUES (?,?,?,?);`, date, title, category, timeGoal
+      );
+
+      console.log(result.lastInsertRowId, result.changes);
+    } catch (error) {
+      console.error('addTimer', error);
     }
   }
 

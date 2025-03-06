@@ -10,6 +10,7 @@ import { Audio } from "expo-av"; // for audio feedback (click sound as you scrol
 import * as Haptics from "expo-haptics"; // for haptic feedback
 
 import { styles } from '../styles/CommonStyles';
+import dbmanager from '../data/database/dbmanager';
 
 const Categorias = [
     { title: 'Estudos', icon: 'school' },
@@ -27,8 +28,9 @@ const Categorias = [
 ];
 
 function FormAddTimer({ navigation }) {
-    const [text, onChangeText] = React.useState('');
-    const [number, onChangeNumber] = React.useState('');
+    const [titulo, onChangeTitulo] = React.useState('');
+    const [duracao, onChangeDuracao] = React.useState('');
+    const [categoria, onChangeCategoria] = React.useState('');
 
     const [showPicker, setShowPicker] = useState(false);
     const [alarmString, setAlarmString] = useState(null);
@@ -49,6 +51,14 @@ function FormAddTimer({ navigation }) {
         return timeParts.join(":");
     };
 
+    const handleAdicionar = async () => {
+        if (!titulo.trim() || !duracao.trim() || !categoria.trim()) {
+            Alert.alert('Erro', 'Preencha todos os campos!');
+            return;
+        }
+
+        await dbmanager.addTimer()
+    };
 
     return (
         <SafeAreaProvider style={[styles.centerView, { marginTop: -150 }]}>
@@ -56,17 +66,17 @@ function FormAddTimer({ navigation }) {
                 {/* Título */}
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeTitulo}
                     placeholder="Título"
                     placeholderTextColor='#FFF'
-                    value={text}
+                    value={titulo}
                 />
                 {/* Categoria */}
 
                 <SelectDropdown
                     data={Categorias}
                     onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index);
+                        onChangeCategoria(selectedItem.title);
                     }}
                     renderButton={(selectedItem, isOpened) => {
                         return (
