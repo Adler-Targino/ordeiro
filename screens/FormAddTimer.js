@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, Text, Button, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { useHeaderHeight } from '@react-navigation/elements'
 import SelectDropdown from 'react-native-select-dropdown'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TimerPickerModal } from "react-native-timer-picker";
@@ -29,11 +30,10 @@ const Categorias = [
 
 function FormAddTimer({ navigation }) {
     const [titulo, onChangeTitulo] = React.useState('');
-    const [duracao, onChangeDuracao] = React.useState('');
+    const [duracao, onChangeDuracao] = useState(null);
     const [categoria, onChangeCategoria] = React.useState('');
 
     const [showPicker, setShowPicker] = useState(false);
-    const [alarmString, setAlarmString] = useState(null);
 
     const formatTime = ({ hours, minutes, seconds }) => {
         const timeParts = [];
@@ -51,6 +51,8 @@ function FormAddTimer({ navigation }) {
         return timeParts.join(":");
     };
 
+    const height = useHeaderHeight()
+
     const handleAdicionar = async () => {
         if (!titulo.trim() || !duracao.trim() || !categoria.trim()) {
             Alert.alert('Erro', 'Preencha todos os campos!');
@@ -61,62 +63,65 @@ function FormAddTimer({ navigation }) {
     };
 
     return (
-        <SafeAreaProvider style={[styles.centerView, { marginTop: -150 }]}>
+        <SafeAreaProvider style={[styles.centerView, { marginTop: -50 }]}>
             <SafeAreaView>
-                {/* Título */}
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={onChangeTitulo}
-                    placeholder="Título"
-                    placeholderTextColor='#FFF'
-                    value={titulo}
-                />
+                <View>
+                    {/* Título */}
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={onChangeTitulo}
+                        placeholder="Título"
+                        placeholderTextColor='#FFF'
+                        value={titulo}
+                    />
+                </View>
                 {/* Categoria */}
-
-                <SelectDropdown
-                    data={Categorias}
-                    onSelect={(selectedItem, index) => {
-                        onChangeCategoria(selectedItem.title);
-                    }}
-                    renderButton={(selectedItem, isOpened) => {
-                        return (
-                            <View style={styles.dropdownButtonStyle}>
-                                {selectedItem && (
-                                    <MaterialIcons name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
-                                )}
-                                <Text style={styles.dropdownButtonTxtStyle}>
-                                    {(selectedItem && selectedItem.title) || 'Categoria'}
-                                </Text>
-                                <MaterialIcons name={isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} style={styles.dropdownButtonArrowStyle} />
-                            </View>
-                        );
-                    }}
-                    renderItem={(item, index, isSelected) => {
-                        return (
-                            <ScrollView style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
-                                <MaterialIcons name={item.icon} style={styles.dropdownItemIconStyle} />
-                                <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
-                            </ScrollView>
-                        );
-                    }}
-                    showsVerticalScrollIndicator={false}
-                    dropdownStyle={styles.dropdownMenuStyle}
-                />
+                <View>
+                    <SelectDropdown
+                        data={Categorias}
+                        onSelect={(selectedItem, index) => {
+                            onChangeCategoria(selectedItem.title);
+                        }}
+                        renderButton={(selectedItem, isOpened) => {
+                            return (
+                                <View style={styles.dropdownButtonStyle}>
+                                    {selectedItem && (
+                                        <MaterialIcons name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                    )}
+                                    <Text style={styles.dropdownButtonTxtStyle}>
+                                        {(selectedItem && selectedItem.title) || 'Categoria'}
+                                    </Text>
+                                    <MaterialIcons name={isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} style={styles.dropdownButtonArrowStyle} />
+                                </View>
+                            );
+                        }}
+                        renderItem={(item, index, isSelected) => {
+                            return (
+                                <ScrollView style={{ ...styles.dropdownItemStyle, ...(isSelected && { backgroundColor: '#D2D9DF' }) }}>
+                                    <MaterialIcons name={item.icon} style={styles.dropdownItemIconStyle} />
+                                    <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
+                                </ScrollView>
+                            );
+                        }}
+                        showsVerticalScrollIndicator={false}
+                        dropdownStyle={styles.dropdownMenuStyle}
+                    />
+                </View>
                 {/* Timer picker */}
                 <View>
                     <Text style={styles.textInput}
                         onPress={() => setShowPicker(true)}>
-                        {alarmString !== null
+                        {duracao !== null
                             ? "Duração da tarefa"
-                            : "Selecione a duração da tarefa"}
+                            : "Selecione a duração da tarefa."}
                     </Text>
                     <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => setShowPicker(true)}>
                         <View style={{ alignItems: "center" }}>
-                            {alarmString !== null ? (
+                            {duracao !== null ? (
                                 <Text style={{ color: "#202020", fontSize: 48 }}>
-                                    {alarmString}
+                                    {duracao}
                                 </Text>
                             ) : null}
                         </View>
@@ -125,13 +130,13 @@ function FormAddTimer({ navigation }) {
                         visible={showPicker}
                         setIsVisible={setShowPicker}
                         onConfirm={(pickedDuration) => {
-                            setAlarmString(formatTime(pickedDuration));
+                            onChangeDuracao(formatTime(pickedDuration));
                             setShowPicker(false);
                         }}
                         modalTitle="Set Alarm"
                         onCancel={() => setShowPicker(false)}
                         closeOnOverlayPress
-                        use12HourPicker
+                        use12HourPicker={false}
                         Audio={Audio}
                         LinearGradient={LinearGradient}
                         Haptics={Haptics}
@@ -141,7 +146,7 @@ function FormAddTimer({ navigation }) {
                     />
                 </View>
                 {/* Botão salvar */}
-                <TouchableOpacity style={styles.saveButton} onPress={() => console.log("Salvo!")}>
+                <TouchableOpacity style={styles.saveButton} onPress={() => handleAdicionar()}>
                     <Text style={styles.saveButtonText}>Salvar</Text>
                 </TouchableOpacity>
             </SafeAreaView>
