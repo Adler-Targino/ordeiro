@@ -22,6 +22,8 @@ class DbManager {
           timeGoal INTEGER
         );`
       );
+
+      console.log('Init: Banco iniciado');
     } catch (error) {
       console.error('Erro ao criar banco ou tabela', error);
     }
@@ -32,14 +34,38 @@ class DbManager {
 
       const result = await this.db.runAsync(
         `INSERT INTO timer (date, title, category, timeGoal) 
-        VALUES (?,?,?,?);`, date, title, category, timeGoal
+        VALUES (?,?,?,?);`, [date, title, category, timeGoal]
       );
+      console.log(date, title, category, timeGoal);
 
-      console.log(result.lastInsertRowId, result.changes);
     } catch (error) {
-      console.error('addTimer', error);
+      console.error('addTimer:', error);
     }
   }
+
+  async listTimers(date){
+    try {
+      const result = await this.db.getAllAsync('SELECT * FROM timer')
+      
+      for(const r of result){
+        console.log(r.id, r.date, r.title, r.category, r.timeGoal);
+      }
+      
+      return result || [];
+    } catch (error){
+      console.error('listTimers:', error)
+    }
+  }
+  
+  async truncateTable() {
+    try {
+        await this.db.runAsync('DELETE FROM timer;');
+        await this.db.runAsync("DELETE FROM sqlite_sequence WHERE name='timer';");
+        console.log('Tabela truncada com sucesso!');
+    } catch (error) {
+        console.error('Erro ao truncar a tabela:', error);
+    }
+}
 
   // Método para retornar o banco de dados, caso precise usá-lo fora
   getDatabase() {

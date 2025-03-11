@@ -1,10 +1,34 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    centerView: { 
-        backgroundColor: "#af82fb", 
-        alignItems: "center", 
-        justifyContent: "center" 
+    AddTimerView: {
+        backgroundColor: "#af82fb",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    loadingView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#af82fb"
+    },
+    homeView: {
+        flex: 1,
+        backgroundColor: "#af82fb"
+    },
+    itemTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    item: {
+        padding: 15,
+        marginVertical: 8,
+        backgroundColor: '#f2f2f2',
+        borderRadius: 8,
+    },
+    itemText: {
+        fontSize: 16,
     },
     textInput: {
         paddingVertical: 10,
@@ -71,7 +95,7 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         alignSelf: "center",
     },
-    
+
     saveButtonText: {
         color: "#fff",
         fontSize: 18,

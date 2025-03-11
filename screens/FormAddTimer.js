@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { useHeaderHeight } from '@react-navigation/elements'
 import SelectDropdown from 'react-native-select-dropdown'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TimerPickerModal } from "react-native-timer-picker";
@@ -51,19 +50,18 @@ function FormAddTimer({ navigation }) {
         return timeParts.join(":");
     };
 
-    const height = useHeaderHeight()
-
     const handleAdicionar = async () => {
         if (!titulo.trim() || !duracao.trim() || !categoria.trim()) {
             Alert.alert('Erro', 'Preencha todos os campos!');
             return;
         }
 
-        await dbmanager.addTimer()
+        await dbmanager.addTimer(new Date().toISOString().split('T')[0], titulo, categoria, duracao)
+        navigation.navigate('HomeScreen');
     };
 
     return (
-        <SafeAreaProvider style={[styles.centerView, { marginTop: -50 }]}>
+        <SafeAreaProvider style={[styles.AddTimerView, { marginTop: -50 }]}>
             <SafeAreaView>
                 <View>
                     {/* Título */}
