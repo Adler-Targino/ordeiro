@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import { styles } from '../styles/CommonStyles';
 import dbmanager from '../data/database/dbmanager';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 function HomeScreen({ navigation }) {
     const [timers, setTimers] = useState([]); // Estado para armazenar os timers
@@ -26,17 +27,21 @@ function HomeScreen({ navigation }) {
 
     return (
         <View style={styles.homeView}>
-            <Text style={styles.itemTitle}>Lista de Timers</Text>
-
             {/* FlatList para exibir os timers */}
             <FlatList
                 data={timers}
                 keyExtractor={(item) => item.id.toString()} // Garante chave única
                 renderItem={({ item }) => (
                     <View style={styles.item}>
-                        <Text style={styles.itemText}>Título: {item.title}</Text>
-                        <Text style={styles.itemText}>Categoria: {item.category}</Text>
-                        <Text style={styles.itemText}>Duração: {item.timeGoal} min</Text>                        
+                        <Text style={styles.itemTitle}>{item.title}</Text>
+                        <Text style={styles.itemText}>{item.category}</Text>
+                        <View style={styles.itemIconDiv}>
+                            <TouchableOpacity style={[styles.itemButton, { backgroundColor: '#04AA6D', }]}>
+                                <MaterialIcons name="play-arrow" size={24} color="#fff" />
+                            </TouchableOpacity>
+                            <Text style={styles.itemText}>{item.timeGoal}</Text>
+                            <Text style={styles.itemText}>Meta: {item.timeGoal}</Text>
+                        </View>
                     </View>
                 )}
             />

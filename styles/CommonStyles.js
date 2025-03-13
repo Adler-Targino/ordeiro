@@ -13,22 +13,38 @@ export const styles = StyleSheet.create({
         backgroundColor: "#af82fb"
     },
     homeView: {
+        paddingTop:10,
         flex: 1,
         backgroundColor: "#af82fb"
     },
     itemTitle: {
         fontSize: 22,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     item: {
         padding: 15,
         marginVertical: 8,
+        marginHorizontal: 10,
         backgroundColor: '#f2f2f2',
         borderRadius: 8,
     },
     itemText: {
         fontSize: 16,
+    },
+    itemIconDiv: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 10
+    },
+    itemButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20, // Metade da largura/altura para ser um círculo
+        justifyContent: 'center', // Centraliza o conteúdo verticalmente
+        alignItems: 'center', // Centraliza o conteúdo horizontalmente
     },
     textInput: {
         paddingVertical: 10,
