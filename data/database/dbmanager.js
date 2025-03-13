@@ -43,6 +43,16 @@ class DbManager {
     }
   }
 
+  async updateTimer(id, timePast) {
+    try {
+      const result = await this.db.runAsync(
+        `UPDATE timer SET timePast = ? WHERE id = ?`, [timePast, id]
+      );
+    } catch (error) {
+      console.error('updateTimer:', error);
+    }
+  }
+
   async listTimers(date){
     try {
       const result = await this.db.getAllAsync('SELECT * FROM timer')
