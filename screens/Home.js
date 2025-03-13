@@ -88,7 +88,7 @@ function HomeScreen({ navigation }) {
                             <TouchableOpacity
                                 style={[
                                     styles.itemButton,
-                                    { backgroundColor: runningTimers[item.id]?.isRunning ? '#d9534f' : '#04AA6D' },
+                                    { backgroundColor: runningTimers[item.id]?.isRunning ? '#d9534f' : '#733684' },
                                 ]}
                                 onPress={() => toggleTimer(item.id)}
                             >

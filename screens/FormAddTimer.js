@@ -18,13 +18,7 @@ const Categorias = [
     { title: 'Esportes', icon: 'directions-run' },
     { title: 'Lazer', icon: 'local-bar' },
     { title: 'Meditação', icon: 'self-improvement' },
-    { title: 'Outro', icon: 'diamond' },
-    { title: 'Estudos', icon: 'school' },
-    { title: 'Trabalho', icon: 'work' },
-    { title: 'Esportes', icon: 'directions-run' },
-    { title: 'Lazer', icon: 'local-bar' },
-    { title: 'Meditação', icon: 'self-improvement' },
-    { title: 'Outro', icon: 'diamond' },
+    { title: 'Outro', icon: 'diamond' }
 ];
 
 function FormAddTimer({ navigation }) {

@@ -37,7 +37,7 @@ function App() {
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{
-                    headerStyle: { backgroundColor: '#6200EE' },
+                    headerStyle: { backgroundColor: '#733684' },
                     headerTintColor: '#fff',
                     headerTitleStyle: { fontWeight: "bold", fontSize: 30 },
                 }}>

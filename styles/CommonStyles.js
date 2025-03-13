@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
         position: "absolute",
         right: 20,
         bottom: 40,
-        backgroundColor: '#f9a86c',
+        backgroundColor: '#733684',
         width: 70,
         height: 70,
         borderRadius: 35,
@@ -64,12 +64,12 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 16,
         overflow: "hidden",
-        borderColor: "#f9a86c",
+        borderColor: "#733684",
         color: "#FFF",
         marginBottom: 15
     },
     dropdownButtonStyle: {
-        borderColor: "#f9a86c",
+        borderColor: "#733684",
         borderWidth: 2,
         borderRadius: 10,
         flexDirection: 'row',
@@ -116,7 +116,7 @@ export const styles = StyleSheet.create({
     },
     saveButton: {
         marginTop: 15,
-        backgroundColor: "#f9a86c", // Verde estilo sucesso
+        backgroundColor: "#733684",
         paddingVertical: 10,
         paddingHorizontal: 30,
         borderRadius: 8,
