@@ -7,7 +7,8 @@ import dbmanager from '../data/database/dbmanager';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 function HomeScreen({ navigation }) {
-    const [timers, setTimers] = useState([]); // Estado para armazenar os timers
+    const [timers, setTimers] = useState([]); // Lista de itens com título e meta de tempo
+    const [runningTimers, setRunningTimers] = useState({}); // Estado para tempos individuais
 
     useFocusEffect(
         React.useCallback(() => {
@@ -45,6 +46,13 @@ function HomeScreen({ navigation }) {
                     </View>
                 )}
             />
+
+            {/* botão de adicionar */}
+            <TouchableOpacity
+                style={[styles.addButton]}
+                onPress={() => navigation.navigate("Adicionar")}>
+                <MaterialIcons name="add" size={35} color="#fff" />
+            </TouchableOpacity>
         </View>
     );
 }

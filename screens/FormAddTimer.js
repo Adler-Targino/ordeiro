@@ -57,7 +57,7 @@ function FormAddTimer({ navigation }) {
         }
 
         await dbmanager.addTimer(new Date().toISOString().split('T')[0], titulo, categoria, duracao)
-        navigation.navigate('HomeScreen');
+        navigation.navigate('Home');
     };
 
     return (

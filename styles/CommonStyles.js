@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#af82fb"
     },
     homeView: {
-        paddingTop:10,
+        paddingTop: 10,
         flex: 1,
         backgroundColor: "#af82fb"
     },
@@ -45,6 +45,17 @@ export const styles = StyleSheet.create({
         borderRadius: 20, // Metade da largura/altura para ser um círculo
         justifyContent: 'center', // Centraliza o conteúdo verticalmente
         alignItems: 'center', // Centraliza o conteúdo horizontalmente
+    },
+    addButton: {
+        position: "absolute",
+        right: 20,
+        bottom: 40,
+        backgroundColor: '#f9a86c',
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     textInput: {
         paddingVertical: 10,

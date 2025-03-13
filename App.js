@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react'
 
@@ -9,7 +9,7 @@ import FormAddTimer from './screens/FormAddTimer'
 import { styles } from './styles/CommonStyles';
 import DbManager from './data/database/dbmanager';
 
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
     const [isDbReady, setIsDbReady] = useState(false);
@@ -27,7 +27,7 @@ function App() {
     if (!isDbReady) {
         // Exibe um carregamento enquanto o banco está inicializando
         return (
-            <View style={ styles.loadingView }>
+            <View style={styles.loadingView}>
                 <ActivityIndicator size="large" color="#ffffff" />
             </View>
         );
@@ -35,10 +35,18 @@ function App() {
 
     return (
         <NavigationContainer>
-            <Drawer.Navigator initialRouteName='HomeScreen'>
-                <Drawer.Screen name='HomeScreen' component={HomeScreen} />
-                <Drawer.Screen name='Adicionar um novo timer' component={FormAddTimer} />
-            </Drawer.Navigator>
+            <Stack.Navigator
+                screenOptions={{
+                    headerStyle: { backgroundColor: '#6200EE' },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: { fontWeight: "bold", fontSize: 30 },
+                }}>
+                <Stack.Screen
+                    name="Home"
+                    component={HomeScreen}
+                    options={{ title: 'Ordeiro' }} />
+                <Stack.Screen name="Adicionar" component={FormAddTimer} />
+            </Stack.Navigator>
         </NavigationContainer>
     );
 }
